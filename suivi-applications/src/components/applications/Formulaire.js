@@ -1,17 +1,26 @@
 import React, { useState } from 'react'
 
-const Formulaire = ({setCompteur}) => {
+const Formulaire = () => {
     const [nom, setNom] = useState('');
     const [version, setVersion] = useState('');
     const [etat, setEtat] = useState('ACTIVE');
+    const [message, setMessage] = useState('');
     
     const enregistrer = e => {
-        e.preventDefault();
-        console.log(` ${nom} ${version} ${etat}`)
-        setCompteur(compteur => compteur+1);
+        const headers = new Headers();
+        headers.append("Content-Type" , "application/json")
+        fetch("http://localhost:8080/applications",
+            {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify({nom: nom, version: version, etat: etat})
+            })
+        .then(reponse => setMessage('Enregistré'))
+        .catch(e => setMessage('Problème'))                
     }
 
     return <form>
+        <div>{message}</div>
         <label>
             Nom :
             <input type="text" onChange= { e => setNom(e.target.value)} value={nom}/> 
@@ -24,7 +33,8 @@ const Formulaire = ({setCompteur}) => {
             <option value="ACTIVE">Active</option>
             <option value="OBSOLETE">Obsolète</option>
         </select>
-        <button onClick = {enregistrer}>Enregistrer</button>
+
+        <button type="button" onClick = {enregistrer}>Enregistrer</button>
     </form>
 }
 
