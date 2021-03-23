@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-const Formulaire = () => {
+const Formulaire = ({titre, sousTitre}) => {
     const [nom, setNom] = useState('');
     const [version, setVersion] = useState('');
     const [etat, setEtat] = useState('ACTIVE');
@@ -20,7 +21,9 @@ const Formulaire = () => {
     }
 
     return <form>
+        <div>{titre}</div>
         <div>{message}</div>
+        <div>{sousTitre}</div>
         <label>
             Nom :
             <input type="text" onChange= { e => setNom(e.target.value)} value={nom}/> 
@@ -34,8 +37,10 @@ const Formulaire = () => {
             <option value="OBSOLETE">Obsolète</option>
         </select>
 
-        <button type="button" onClick = {enregistrer}>Enregistrer</button>
+        <button type="button" onClick = {enregistrer}>Enregistrer</button> 
+        <Link to={'tableau'}><button>Tableau des applications</button></Link>
     </form>
+
 }
 
 export default Formulaire
