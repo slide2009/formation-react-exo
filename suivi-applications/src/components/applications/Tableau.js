@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const Tableau = () => {
+const Tableau = ({compteur}) => {
     const [data, setData] = useState([])    
     
     const charger = () => {
@@ -54,6 +54,7 @@ const Tableau = () => {
         </tbody>
     </table>
     <Link to={'formulaire'}><button>Saisir un formulaire</button></Link>
+    <div>Il y a eu {compteur} enregistrements</div>
     </div>
     : <></>
 }  

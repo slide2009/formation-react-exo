@@ -1,16 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {HashRouter} from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
+import { createStore, compose  } from 'redux';
+import { Provider } from 'react-redux';
 
 import './index.css';
 import App from './App';
+import {applicationReducer} from './components/applications/reducer'
 import reportWebVitals from './reportWebVitals';
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose 
+const store = createStore(applicationReducer, composeEnhancers())
 
 ReactDOM.render(
   <React.StrictMode>
-    <HashRouter>
-      <App />
-    </HashRouter>
+    <Provider store={store}>
+      <HashRouter>
+        <App />
+      </HashRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

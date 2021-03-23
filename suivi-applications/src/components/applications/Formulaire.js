@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const Formulaire = ({titre, sousTitre}) => {
+const Formulaire = ({ajouter}) => {
     const [nom, setNom] = useState('');
     const [version, setVersion] = useState('');
     const [etat, setEtat] = useState('ACTIVE');
@@ -16,14 +16,15 @@ const Formulaire = ({titre, sousTitre}) => {
                 headers: headers,
                 body: JSON.stringify({nom: nom, version: version, etat: etat})
             })
-        .then(reponse => setMessage('Enregistré'))
+        .then(reponse => {
+            setMessage('Enregistré')
+            ajouter(1)
+        })
         .catch(e => setMessage('Problème'))                
     }
 
     return <form>
-        <div>{titre}</div>
         <div>{message}</div>
-        <div>{sousTitre}</div>
         <label>
             Nom :
             <input type="text" onChange= { e => setNom(e.target.value)} value={nom}/> 
