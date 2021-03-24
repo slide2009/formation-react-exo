@@ -6,46 +6,53 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import { useFormik } from 'formik'
+
 
 const Formulaire = ({ajouter}) => {
-    const [nom, setNom] = useState('');
-    const [version, setVersion] = useState('');
-    const [etat, setEtat] = useState('ACTIVE');
+    const ACTIVE = 'ACTIVE'
     const [message, setMessage] = useState('');
-    
-    const enregistrer = e => {
-        const headers = new Headers();
-        headers.append("Content-Type" , "application/json")
-        fetch("http://localhost:8080/applications",
-            {
-                method: 'POST',
-                headers: headers,
-                body: JSON.stringify({nom: nom, version: version, etat: etat})
-            })
-        .then(reponse => {
-            setMessage('Enregistré')
-            ajouter(1)
-        })
-        .catch(e => setMessage('Problème'))           
-    }
 
-    return <form>
+    const formik = useFormik({
+        initialValues: { 
+            nom: 'Appli Toto', 
+            version: '0.1.1',
+            etat: ACTIVE
+        }, 
+        onSubmit: values => {
+            const headers = new Headers();
+            headers.append("Content-Type" , "application/json")
+            fetch("http://localhost:8080/applications",
+                {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify(values)
+                })
+            .then(reponse => {
+                setMessage('Enregistré')
+                ajouter(1)
+            })
+            .catch(e => setMessage('Problème'))
+        }
+    })
+
+    return <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={2}>
             <Grid item xs={12}>
                 <div>{message}</div>
             </Grid>
             <Grid item xs={12}>
-                <TextField label="Nom" onChange= {e => setNom(e.target.value)}/>                
+                <TextField {...formik.getFieldProps('nom')} label="Nom" /> 
             </Grid>
             <Grid item xs={12}>
-                <TextField label="Version" onChange= { e => setVersion(e.target.value)}/>
+                <TextField {...formik.getFieldProps('version')} label="Version"/>
             </Grid>
             <Grid item xs={12} spacing={5}>
                 <FormControl>
-                    <InputLabel>Etat</InputLabel>
-                    <Select onChange={e => setEtat(e.target.value) } value={etat}>
-                        <MenuItem value="ACTIVE">Active</MenuItem>
+                    <InputLabel>Etat</InputLabel>                    
+                    <Select {...formik.getFieldProps('etat')} >
+                        <MenuItem value={ACTIVE}>Active</MenuItem>
                         <MenuItem value="OBSOLETE">Obsolète</MenuItem>
                     </Select>
                 </FormControl>
@@ -53,7 +60,7 @@ const Formulaire = ({ajouter}) => {
             
             <Grid container justify="center" fixed>
                 <Grid xs={2}>
-                    <Button onClick = {enregistrer} spacing={3} variant="outlined" color='primary'>Enregistrer</Button>
+                    <Button type='submit' variant="outlined" color='primary'>Enregistrer</Button>
                 </Grid>
                 <Grid xs={2}> 
                     <Link to={'tableau'} component={Button} variant="outlined" color='secondary'>Tableau des applications</Link>
