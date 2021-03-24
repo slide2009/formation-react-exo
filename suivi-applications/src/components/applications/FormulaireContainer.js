@@ -5,7 +5,6 @@ import Formulaire from './Formulaire';
 const mapDispatchToProps = dispatch => ({
 	ajouter : valeur => dispatch(modifierCompteur(valeur)) 
 });
-
 // const connecteRedux = connect(null, mapDispatchToProps)
 // const FormulaireContainer = connecteRedux(Formulaire)
 // export default FormulaireContainer;
