@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const Tableau = ({compteur}) => {
-    const [data, setData] = useState([])    
+    const [data, setData] = useState([])
     
     const charger = () => {
         const headers = new Headers();
@@ -25,8 +25,8 @@ const Tableau = ({compteur}) => {
         .catch(e => console.log(e))
     }
 
-    return data.length > 0 
-    ? <div>        
+    return data.length &&
+    <div>        
     <table>
         <thead>
             <tr>
@@ -56,6 +56,6 @@ const Tableau = ({compteur}) => {
     <Link to={'formulaire'}><button>Saisir un formulaire</button></Link>
     <div>Il y a eu {compteur} enregistrements</div>
     </div>
-    : <></>
+
 }  
 export default Tableau

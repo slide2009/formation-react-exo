@@ -1,4 +1,6 @@
 import { connect } from 'react-redux';
 import Tableau from './Tableau';
-const mapStateToProps = state => ({ compteur : state});
+
+const mapStateToProps = storeState => ({ compteur : storeState.compteur});
+
 export default connect(mapStateToProps)(Tableau);
