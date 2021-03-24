@@ -8,7 +8,19 @@ import TextField from '@material-ui/core/TextField';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 import { useFormik } from 'formik'
+import { FormHelperText } from '@material-ui/core';
 
+
+const validate = values => {
+	const errors = {};
+	if ( !values.etat ) { 
+		errors.etat = "L'état doit être rempli"
+	}
+    if(!values.nom || (values.nom && values.nom.length<3)) {
+        errors.nom = "Le nom doit être rempli et de longueur > 2"
+    }
+	return errors;
+}
 
 const Formulaire = ({ajouter}) => {
     const ACTIVE = 'ACTIVE'
@@ -18,8 +30,9 @@ const Formulaire = ({ajouter}) => {
         initialValues: { 
             nom: 'Appli Toto', 
             version: '0.1.1',
-            etat: ACTIVE
+            etat: null
         }, 
+        validate,
         onSubmit: values => {
             const headers = new Headers();
             headers.append("Content-Type" , "application/json")
@@ -43,18 +56,20 @@ const Formulaire = ({ajouter}) => {
                 <div>{message}</div>
             </Grid>
             <Grid item xs={12}>
-                <TextField {...formik.getFieldProps('nom')} label="Nom" /> 
+                <TextField {...formik.getFieldProps('nom')} label="Nom" error={formik.errors.nom} helperText={formik.errors.nom}/> 
             </Grid>
             <Grid item xs={12}>
                 <TextField {...formik.getFieldProps('version')} label="Version"/>
             </Grid>
             <Grid item xs={12} spacing={5}>
-                <FormControl>
-                    <InputLabel>Etat</InputLabel>                    
-                    <Select {...formik.getFieldProps('etat')} >
+                <FormControl error={formik.errors.etat}>
+                    <InputLabel>Etat</InputLabel>
+                    <Select {...formik.getFieldProps('etat')}>
+                        <MenuItem>--</MenuItem>
                         <MenuItem value={ACTIVE}>Active</MenuItem>
                         <MenuItem value="OBSOLETE">Obsolète</MenuItem>
                     </Select>
+                    {formik.errors.etat && <FormHelperText>{formik.errors.etat}</FormHelperText>}
                 </FormControl>
             </Grid>
             
