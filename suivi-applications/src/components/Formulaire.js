@@ -1,40 +1,38 @@
 import React, { useState }  from "react";
 
-const Formulaire = () => {
+const Formulaire = ({nomDefaut, setNomDefaut}) => {
 
     const [nom, setNom] = useState('application test')
     const [version, setVersion] = useState(1)
-    const [etat, setEtat] = useState()
+    const [etat, setEtat] = useState("OBSOLETE")
 
-    const selectionEtat = e => console.log(e.target.value)
+    const selectionEtat = e => setEtat(e.target.value)
+
 
     return <form>
+        <div> 
+            Nom : <input onChange = {e => {
+                setNom(e.target.value)
+                setNomDefaut(e.target.value)
+            }
+            } value={nom}/>
+        </div>
 
-        <label>
-        Nom :
-        <input onChange = {e => {
-            console.log(e.target.value)
-            // setNom ...
-        }}/>
+        <div> 
+            Version : <input onChange = {e => setVersion(e.target.value)} value={version}/>
+        </div>
 
-        </label>
-        <br/>
-
-        <label>
-            Etat <input></input>
-        </label>
-
-        <select onChange= {selectionEtat}>
+        <select onChange= {selectionEtat} value={etat}>
             <option value="ACTIVE">ACTIVE </option>
             <option value="OBSOLETE">OBSOLETE</option>
-            {/* <option ... */}
         </select>
 
         <button onClick = { e => {
             e.preventDefault();
-            console.log(nom)}
-
-        }>Enregistrer</button>
+            console.log(nom)
+            console.log(version)
+            console.log(etat)
+        }}>Enregistrer</button>
     </form>
 }
 
