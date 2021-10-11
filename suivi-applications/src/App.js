@@ -6,12 +6,12 @@ import MonComposant from './components/MonComposant';
 
 const App = () => {
 
-  const [nomDefaut, setNomDefaut] = useState('Appli parent')
+  const [compteur, setCompteur] = useState(1)
 
   return (
     <div className="App">
-      Le nom d'appli du parent : {nomDefaut}
-      <Formulaire nomDefaut={nomDefaut} setNomDefaut={setNomDefaut}/>
+      Nombre de clics : {compteur}
+      <Formulaire/>
     </div>
   );
 }
