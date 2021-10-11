@@ -19,11 +19,23 @@ const Tableau = () => {
 				<th>Nom</th>
 				<th>Version</th>
 				<th>Etat</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 		{
-		
+            
+		data.map(appli => <tr> 
+            <td>{appli.id}</td>
+            <td>{appli.nom}</td>
+            <td>{appli.etat}</td>
+            <td>{appli.version}</td>
+            <td><button onClick = { () => {
+                // attraper appli.id
+                // faire Delete sur  http://localhost:8080/applications/appli.id
+
+            }}>Supprimer</button></td>
+        </tr>)
 		}
 		</tbody>
 	</table>

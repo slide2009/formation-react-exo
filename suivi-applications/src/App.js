@@ -1,17 +1,16 @@
 import { useState } from 'react';
 import './App.css';
-import Formulaire from './components/Formulaire';
+import Tableau from './components/Tableau';
 import MaDiv from './components/MaDiv';
 import MonComposant from './components/MonComposant';
+import Formulaire from './components/Formulaire';
 
 const App = () => {
 
-  const [compteur, setCompteur] = useState(1)
-
   return (
     <div className="App">
-      Nombre de clics : {compteur}
       <Formulaire/>
+      <Tableau/>
     </div>
   );
 }
