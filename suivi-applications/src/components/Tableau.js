@@ -28,8 +28,8 @@ const Tableau = () => {
 		data.map(appli => <tr> 
             <td>{appli.id}</td>
             <td>{appli.nom}</td>
-            <td>{appli.etat}</td>
             <td>{appli.version}</td>
+            <td>{appli.etat}</td>
             <td><button onClick = { () => {
                 // attraper appli.id
                 // faire Delete sur  http://localhost:8080/applications/appli.id
