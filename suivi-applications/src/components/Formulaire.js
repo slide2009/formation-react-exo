@@ -1,6 +1,7 @@
 import React, { useEffect, useState }  from "react";
+import { Link } from "react-router-dom";
 
-const Formulaire = () => {
+const Formulaire = ({ajouter, enregistrerNom}) => {
 
     const [nom, setNom] = useState('application test')
     const [version, setVersion] = useState(1)
@@ -10,6 +11,7 @@ const Formulaire = () => {
     
     const enregistrer = e => {
         e.preventDefault();
+        ajouter(1)
         const headers = new Headers();
         headers.append("Content-Type" , "application/json")
         fetch("http://localhost:8080/applications",
@@ -37,6 +39,7 @@ const Formulaire = () => {
         </select>
 
         <button onClick = { enregistrer}>Enregistrer</button>
+        <div></div>
     </form>
 }
 
