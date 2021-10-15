@@ -23,6 +23,7 @@ const Tableau = props => {
 
 	return data.length > 0 ? <>
 	<div> Nombre de clics : {props.compteur}</div>
+	<div> Nombre de clics : {props.nomAppli}</div>
 	<table>
 		<thead>
 			<tr>

@@ -1,5 +1,7 @@
 import React, { useEffect, useState }  from "react";
 import { Link } from "react-router-dom";
+import Grid from '@material-ui/core/Grid';
+import { Button, Container, MenuItem, Select, TextField } from "@material-ui/core";
 
 const Formulaire = ({ajouter, enregistrerNom}) => {
 
@@ -12,6 +14,7 @@ const Formulaire = ({ajouter, enregistrerNom}) => {
     const enregistrer = e => {
         e.preventDefault();
         ajouter(1)
+        enregistrerNom(nom)
         const headers = new Headers();
         headers.append("Content-Type" , "application/json")
         fetch("http://localhost:8080/applications",
@@ -25,21 +28,41 @@ const Formulaire = ({ajouter, enregistrerNom}) => {
     }
 
     return <form>
-        <div> 
-            Nom : <input onChange = {e => {
-                setNom(e.target.value)
-            }} value={nom}/>
-        </div>
-        <div> 
-            Version : <input onChange = {e => setVersion(e.target.value)} value={version}/>
-        </div>
-        <select onChange= {selectionnerEtat} value={etat}>
-            <option value="ACTIVE">ACTIVE </option>
-            <option value="OBSOLETE">OBSOLETE</option>
-        </select>
+        <Container maxWidth='md'>
+        <Grid container spacing={4}>
+            <Grid item md={12}> 
 
-        <button onClick = { enregistrer}>Enregistrer</button>
-        <div></div>
+                Création d'une application
+            </Grid>
+            <Grid item xs={6} md={12}>
+                <TextField label="Nom" variant='outlined' onChange = {e => {setNom(e.target.value)}} value={nom}/> 
+            </Grid>
+            <Grid item xs={6}  md={12}>
+                <TextField label="Version" variant='outlined' onChange = {e => {setVersion(e.target.value)}} value={version}/> 
+            </Grid>
+            <Grid item md={12}>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={etat}
+                        onChange={selectionnerEtat}
+                    >
+                        <MenuItem value='ACTIVE'>ACTIVE</MenuItem>
+                        <MenuItem value='OBSOLETE'>OBSOLETE</MenuItem>
+                    </Select>
+            </Grid>
+
+            <Grid container alignContent='center'>
+                <Grid item>
+                    <Button color="primary" variant='outlined' onClick = { enregistrer}>Enregistrer</Button>
+                </Grid>
+                <Grid item>
+
+                    <Link to='/tableau' color="secondary" component={Button}>Retour au tableau</Link>
+                </Grid>
+            </Grid>
+        </Grid>
+        </Container>
     </form>
 }
 
