@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import MUIDataTable from "mui-datatables";
+import { Button, ButtonGroup, Grid } from "@material-ui/core";
 
 const Tableau = props => {								
 	const [data, setData] = useState([])    
@@ -20,44 +22,55 @@ const Tableau = props => {
 	}, [])
 
 	const history = useHistory()
+	const optionsTableau = {
+		selectableRows : 'none'
+	}
+	const colonnes = [
+
+		{
+		 name: 'id',
+		 label: 'Identifiant'	
+		},
+		{
+		 name: 'nom',
+		 label: "Nom de l'application"	
+		},
+		{
+		 name: 'version',
+		 label: "Version"	
+		},
+		{
+		 name: 'etat',
+		 label: "Etat"	
+		},
+		
+		{
+		 name: 'id',
+		 label: ' ',
+		 options: {
+			 customBodyRender : (value, tableMeta, updateValue) => {
+				 return <Button variant='outlined' color='secondary' onClick = { () => {
+					fetch(`http://localhost:8080/applications/${value}`, { method: 'DELETE'})
+					.then(reponse => {
+						if(reponse.status === 200) {
+							charger()
+						}
+					})
+					.catch(e => console.log(e))
+				}}>Supprimer</Button>
+			 }
+		 }
+		}
+	]
 
 	return data.length > 0 ? <>
-	<div> Nombre de clics : {props.compteur}</div>
-	<div> Nombre de clics : {props.nomAppli}</div>
-	<table>
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Nom</th>
-				<th>Version</th>
-				<th>Etat</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-		{
-		data.map(appli => <tr> 
-            <td>{appli.id}</td>
-            <td>{appli.nom}</td>
-            <td>{appli.version}</td>
-            <td>{appli.etat}</td>
-            <td><button onClick = { () => {
-                // attraper appli.id
-                // faire Delete sur  http://localhost:8080/applications/appli.id
-				fetch(`http://localhost:8080/applications/${appli.id}`, { method: 'DELETE'})
-				.then(reponse => {
-					if(reponse.status === 200) {
-						// recharger le tableau 
-						charger()
-					}
-				})
-				.catch(e => console.log(e))
-            }}>Supprimer</button></td>
-        </tr>)
-		}
-		</tbody>
-	</table>
-	<button onClick={() => history.push('/formulaire')} >Créer une application</button>
+	<MUIDataTable title="Liste des applications" data={data} 
+		columns={colonnes} options={optionsTableau}/>
+	<ButtonGroup >
+		<Button onClick={() => history.push('/formulaire')} >Créer une application</Button>
+
+	</ButtonGroup>
+		
 	</>
     :<></>
 }

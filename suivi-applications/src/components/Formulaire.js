@@ -57,7 +57,6 @@ const Formulaire = ({ajouter, enregistrerNom}) => {
                     <Button color="primary" variant='outlined' onClick = { enregistrer}>Enregistrer</Button>
                 </Grid>
                 <Grid item>
-
                     <Link to='/tableau' color="secondary" component={Button}>Retour au tableau</Link>
                 </Grid>
             </Grid>
