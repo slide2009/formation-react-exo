@@ -1,16 +1,13 @@
-import { useState } from 'react';
 import './App.css';
-import ComposantClasse from './components/ComposantClasse';
-import ComposantFunc from './components/ComposantFunc';
 import Formulaire from './components/Formulaire';
+import Tableau from './components/Tableau';
 
 const App = () => {
-  const [compteur, setCompteur] = useState(0)
   return <>
-    <ComposantClasse/>
-    <ComposantFunc/>
+    <Tableau />
+    {/* <Formulaire/> */}
   </>
-  ;
+    ;
 }
 
 export default App;

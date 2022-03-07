@@ -6,6 +6,19 @@ const Formulaire = ({setCompteur,  compteur}) => {
     const [version, setVersion] = useState(1)
     const [etat, setEtat] = useState("OBSOLETE")
 
+    const enregistrer = () => {
+        const headers = new Headers();
+        headers.append("Content-Type" , "application/json")
+        fetch("http://localhost:8080/applications",
+            {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify({nom: nom, version: version, etat: etat})
+            })
+        .then(reponse => console.log(reponse))
+        .catch(e => console.log(e))
+    }
+
     return <form>
         <div> 
             Nom : <input onChange = {e =>  setNom(e.target.value)} value={nom}/>
@@ -19,12 +32,8 @@ const Formulaire = ({setCompteur,  compteur}) => {
         </select>
 
         <button onClick = { e => {
-            const compteurIncr = compteur +1;
-            setCompteur(compteurIncr)
-            e.preventDefault();
-            console.log(nom)
-            console.log(version)
-            console.log(etat)
+            e.preventDefault()
+            enregistrer()
         }}>Enregistrer</button>
     </form>
 }
