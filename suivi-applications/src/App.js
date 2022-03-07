@@ -1,15 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
-import MonComposant from './components/MonComposant';
-import MonComposantState from './components/MonComposantState';
-import Enfant from './components/Enfant';
+import Formulaire from './components/Formulaire';
 
 const App = () => {
   return (
     <div className="App">
-      <MonComposant>
-        <Enfant/>
-      </MonComposant>
+      <Formulaire />
     </div>
   );
 }
