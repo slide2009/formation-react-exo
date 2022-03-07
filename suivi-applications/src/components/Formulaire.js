@@ -8,14 +8,11 @@ const Formulaire = () => {
 
     return <form>
         <div> 
-            Nom : <input onChange = {e => {
-                setNom(e.target.value)
-            }
-            }/>
+            Nom : <input onChange = {e =>  setNom(e.target.value)} value={nom}/>
         </div>
 
         <div> 
-            Version : <input onChange = {e => setVersion(e.target.value)}/>
+            Version : <input onChange = {e => setVersion(e.target.value)} value={version}/>
         </div>
 
         <select onChange= {e => setEtat(e.target.value)} value={etat}>
