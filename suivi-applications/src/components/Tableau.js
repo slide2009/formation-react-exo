@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 const Tableau = () => {								
 	const [data, setData] = useState([])    
 
-    const [estSupprime, setEstSupprime] = useState(false)
-
     const charger = () => {
         const headers = new Headers();
         headers.append("Content-Type", "application/json");
@@ -13,9 +11,10 @@ const Tableau = () => {
             .then(reponse => setData(reponse))
             .catch(e => console.log(e));
     }
-	useEffect(()=> {
-		charger();
-	}, [estSupprime])
+	
+    useEffect(()=> {
+       charger();
+	}, [])
     
     const supprimer = idApplication => {
         const headers = new Headers();
@@ -23,7 +22,7 @@ const Tableau = () => {
         fetch(`http://localhost:8080/applications/${idApplication}`, 
             {headers: headers,
             method: 'DELETE'})
-        .then(reponse => setEstSupprime(estSupprime => !estSupprime))
+        .then(reponse => charger())
         .catch(e => console.log(e))
         
     }

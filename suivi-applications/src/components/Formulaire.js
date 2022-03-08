@@ -1,6 +1,6 @@
 import { useState }  from "react";
 
-const Formulaire = ({setCompteur,  compteur}) => {
+const Formulaire = () => {
 
     const [nom, setNom] = useState('application test')
     const [version, setVersion] = useState(1)
@@ -15,7 +15,9 @@ const Formulaire = ({setCompteur,  compteur}) => {
                 headers: headers,
                 body: JSON.stringify({nom: nom, version: version, etat: etat})
             })
-        .then(reponse => console.log(reponse))
+        .then(reponse => {
+            console.log(reponse)
+        })
         .catch(e => console.log(e))
     }
 
