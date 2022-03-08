@@ -1,10 +1,16 @@
-import React from 'react' // toujours
+import React, { useState } from 'react' // toujours
 import Enfant from './Enfant'
-const MonComposant = props => <div>
-    Affichage de Mon composant
-    <br/>
-    je ne sais pas ce que je vais mettre ensuite
-        {props.children}
+const MonComposant = props => {
+
+    
+
+    return <>
+    
+    
+    <div>
+        <Enfant/>
     </div>
+    </>
+}
 
 export default MonComposant
