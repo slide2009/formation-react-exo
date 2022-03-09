@@ -8,6 +8,8 @@ import FormulaireContainer from './components/FormulaireContainer';
 import MonComposant from './components/MonComposant';
 import Tableau from './components/Tableau';
 import TableauContainer from './components/TableauContainer';
+import TableauDataGrid from './components/TableauDataGrid';
+import TableauDatatables from './components/TableauDatatables';
 
 const App = () => {
   
@@ -18,6 +20,8 @@ const App = () => {
       <Route path='dashboard-redux' element={<DashboardContainer/>}/>
       <Route path='dashboard' element={<Dashboard/>}/>
       <Route path='demo' element={<MonComposant/>}/>
+      <Route path='tableau-datatables' element={<TableauDatatables/>}/>
+      <Route path='tableau-datagrid' element={<TableauDataGrid/>}/>
     </Routes>
   </>
     ;

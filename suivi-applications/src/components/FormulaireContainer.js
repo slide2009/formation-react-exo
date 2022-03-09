@@ -4,7 +4,7 @@ import { majNomAppli, modifierCompteur } from './redux/actions'
 
 const mapDispatchToProps = dispatch => (
     {
-    	ajouter : valeur => dispatch(modifierCompteur(valeur)), 
+    	incrementer : () => dispatch(modifierCompteur()), 
     	mettreAJour : valeur => dispatch(majNomAppli(valeur)), 
     }
 )

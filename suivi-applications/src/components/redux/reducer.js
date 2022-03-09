@@ -4,7 +4,7 @@ export const applicationReducer = (state = {compteur : 0, nomAppli : ''}, action
 	if(action.type === MODIFIER_COMPTEUR) {
 		return {
             ...state,
-            compteur : state.compteur + action.payload
+            compteur : state.compteur + 1
         }
     }
     
