@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard';
 import DashboardContainer from './components/DashboardContainer';
 import Formulaire from './components/Formulaire';
 import FormulaireContainer from './components/FormulaireContainer';
+import FormulaireFormik from './components/FormulaireFormik';
 import MonComposant from './components/MonComposant';
 import Tableau from './components/Tableau';
 import TableauContainer from './components/TableauContainer';
@@ -22,6 +23,7 @@ const App = () => {
       <Route path='demo' element={<MonComposant/>}/>
       <Route path='tableau-datatables' element={<TableauDatatables/>}/>
       <Route path='tableau-datagrid' element={<TableauDataGrid/>}/>
+      <Route path='formulaire-formik' element={<FormulaireFormik/>}/>
     </Routes>
   </>
     ;

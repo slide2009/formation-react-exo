@@ -35,7 +35,7 @@ const Formulaire = ({ incrementer, mettreAJour }) => {
         <form>
             <Container>
                 <Paper elevation={2}>
-                    <Grid container spacing={3}>
+                    <Grid container spacing={3} padding={2}>
                         <Grid item xs={12}>
 
                         </Grid>
@@ -56,7 +56,7 @@ const Formulaire = ({ incrementer, mettreAJour }) => {
                         <Grid item xs={12}/>
                         <Grid item/>
                     </Grid>
-                            <Box sx={{alignItems: 'center', display: 'flex'}}>
+                            <Box sx={{alignItems: 'center', display: 'flex', padding :'2em'}}>
                                 <ButtonGroup variant="outlined" aria-label="outlined button group">
                                     <Button onClick={e => { e.preventDefault(); enregistrer()}}> Enregistrer</Button>
                                 </ButtonGroup>

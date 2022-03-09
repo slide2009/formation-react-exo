@@ -1,4 +1,4 @@
-import { MAJ_NOM_APPLI, MODIFIER_COMPTEUR } from "./actions";
+import { MAJ_NOM_APPLI, MODIFIER_COMPTEUR} from "./actions";
 
 export const applicationReducer = (state = {compteur : 0, nomAppli : ''}, action) => {
 	if(action.type === MODIFIER_COMPTEUR) {
@@ -14,6 +14,5 @@ export const applicationReducer = (state = {compteur : 0, nomAppli : ''}, action
             nomAppli : action.payload
         }
     }
-    
 	return state;
 }
