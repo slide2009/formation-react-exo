@@ -3,6 +3,7 @@ import Grid from '@mui/material/Grid';
 import { Box } from "@mui/system";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { default as MuiLink } from '@material-ui/core/Link'
 
 const Formulaire = ({ incrementer, mettreAJour }) => {
 
@@ -46,25 +47,35 @@ const Formulaire = ({ incrementer, mettreAJour }) => {
                         <Grid item xs={6}>
                             <FormControl fullWidth>
                                 <InputLabel id="etat" fullWidth>Etat de l'application</InputLabel>
-                                <Select labelId="etat" label="Etat de l'application" value={etat}>
+                                <Select labelId="etat" label="Etat de l'application" value={etat} onChange={e => setEtat(e.target.value)}>
                                     {["ACTIVE", "OBSOLETE"].map(etat => <MenuItem key={etat} value={etat}>{etat}</MenuItem>)}
                                 </Select>
                             </FormControl>
                         </Grid>
-                        <Grid item xs={12}/>
-                        <Grid item/>
+                        <Grid item xs={12} />
+                        <Grid item />
                     </Grid>
-                            <Box sx={{alignItems: 'center', display: 'flex', padding :'2em'}}>
-                                <ButtonGroup variant="outlined" aria-label="outlined button group">
-                                    <Button onClick={e => { e.preventDefault(); enregistrer()}}> Enregistrer</Button>
-                                </ButtonGroup>
-                            </Box>
+                    <Box sx={{ alignItems: 'center', display: 'flex', padding: '2em' }}>
+                        <ButtonGroup variant="outlined" aria-label="outlined button group">
+                            <Button onClick={e => { e.preventDefault(); enregistrer() }}> Enregistrer</Button>
+                        </ButtonGroup>
+                    </Box>
                 </Paper>
+                <Grid container>
+                    <Grid item xs={4}>
+                        <MuiLink underline='none'>
+                            <Link to={'/tableau-redux'}>Retour vers le tableau redux</Link>
+                        </MuiLink>
+                    </Grid>
+                    <Grid item>
+                        <MuiLink underline='none'>
+                            <Link to={'/tableau-datatables'}>Retour vers le tableau datatables</Link>
+                        </MuiLink>
+                    </Grid>
+                </Grid>
             </Container>
         </form>
-        <div>
-            <Link to={'/tableau-redux'}>Retour vers le tableau</Link>
-        </div>
+
     </>
 }
 
