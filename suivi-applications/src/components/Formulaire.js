@@ -1,15 +1,13 @@
+import { Button, ButtonGroup, Container, FormControl, InputLabel, MenuItem, Paper, Select, TextField } from "@mui/material";
+import Grid from '@mui/material/Grid';
+import { Box } from "@mui/system";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import MonInput from "./MonInput";
-import Grid from '@mui/material/Grid';
-import { Button, ButtonGroup, Container, FormControl, InputLabel, MenuItem, Paper, Select, TextField } from "@mui/material";
-import { Box, createTheme } from "@mui/system";
-import { ThemeProvider } from "@emotion/react";
 
 const Formulaire = ({ incrementer, mettreAJour }) => {
 
-    const { state } = useLocation();
-    const [nom, setNom] = useState(state && state.nomAppli ? state.nomAppli : 'application test')
+    // const { state } = useLocation();
+    const [nom, setNom] = useState('application test')
     const [version, setVersion] = useState(1)
     const [etat, setEtat] = useState("OBSOLETE")
 
